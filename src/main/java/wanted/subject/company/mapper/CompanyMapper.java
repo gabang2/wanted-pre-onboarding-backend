@@ -9,9 +9,9 @@ import wanted.subject.company.entity.Company;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CompanyMapper {
 
-    // Company -> CompanyResponseDTO
+    // User -> CompanyResponseDTO
     CompanyResponseDto companyToCompanyResponseDTO(Company company);
 
-    // CompanyRequestDTO -> Company
+    // CompanyRequestDTO -> User
     Company companyRequestDtoToCompany(CompanyRequestDto CompanyRequestDto);
 }
