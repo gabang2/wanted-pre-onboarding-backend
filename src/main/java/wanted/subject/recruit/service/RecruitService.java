@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.subject.company.service.CompanyService;
+import wanted.subject.recruit.dto.RecruitPatchDto;
 import wanted.subject.recruit.dto.RecruitRequestDto;
 import wanted.subject.recruit.entity.Recruit;
 import wanted.subject.recruit.mapper.RecruitMapper;
@@ -26,5 +27,33 @@ public class RecruitService {
         Recruit recruit = recruitMapper.recruitRequestDtoToRecruit(recruitRequestDto);
         recruit.setCompany(companyService.verifiedCompany(recruitRequestDto.getCompanyId()));
         return recruitRepository.save(recruit);
+    }
+
+    /**
+     * Update : 수정
+     * @param recruitId
+     * @param recruitPatchDto
+     * @return Recruit
+     */
+    public Recruit updateRecruit(Long recruitId, RecruitPatchDto recruitPatchDto) {
+        Recruit recruit = verifiedRecruit(recruitId);
+        recruit.updateRecruit(
+                recruitPatchDto.getCountry(),
+                recruitPatchDto.getRegion(),
+                recruitPatchDto.getPosition(),
+                recruitPatchDto.getReward(),
+                recruitPatchDto.getTech(),
+                recruitPatchDto.getContent()
+        );
+        return recruit;
+    }
+
+    /**
+     * recruitId가 유효한지 검증
+     * @param recruitId
+     * @return
+     */
+    public Recruit verifiedRecruit(Long recruitId) {
+        return recruitRepository.findById(recruitId).orElseThrow(() -> new RuntimeException("채용 공고 Id 가 유효하지 않습니다."));
     }
 }

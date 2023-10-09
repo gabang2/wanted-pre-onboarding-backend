@@ -49,6 +49,24 @@ public class Recruit {
         this.content = content;
     }
 
+    /**
+     * Update : Recruit 수정
+     * @param country
+     * @param region
+     * @param position
+     * @param reward
+     * @param tech
+     * @param content
+     */
+    public void updateRecruit(String country, String region, String position, int reward, String tech, String content) {
+        this.country = Optional.ofNullable(country).orElse(this.country);
+        this.region = Optional.ofNullable(region).orElse(this.region);
+        this.position = Optional.ofNullable(position).orElse(this.position);
+        if (reward != 0) this.reward = reward;
+        this.tech = Optional.ofNullable(tech).orElse(this.tech);
+        this.content = Optional.ofNullable(content).orElse(this.content);
+    }
+
     //== 연관관계 매핑 ==//
     public void setCompany(Company company) {
         if (this.company != null) {

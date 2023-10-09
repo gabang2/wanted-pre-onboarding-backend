@@ -10,9 +10,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RecruitRequestDto {
-    @NotNull
-    private Long companyId;
+public class RecruitPatchDto {
     @NotNull
     private String country;         // 국가
     @NotNull
