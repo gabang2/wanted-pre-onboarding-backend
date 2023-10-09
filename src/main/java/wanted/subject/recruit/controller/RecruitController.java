@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import wanted.subject.recruit.dto.RecruitDetailResponseDto;
 import wanted.subject.recruit.dto.RecruitPatchDto;
 import wanted.subject.recruit.dto.RecruitRequestDto;
 import wanted.subject.recruit.dto.RecruitResponseDto;
@@ -25,6 +26,7 @@ public class RecruitController {
 
     /**
      * 채용 공고 생성
+     *
      * @param recruitRequestDto
      * @return ResponseEntity(201)
      */
@@ -38,6 +40,7 @@ public class RecruitController {
 
     /**
      * 채용공고 수정
+     *
      * @param recruitId
      * @param recruitPatchDto
      * @return ResponseEntity(200)
@@ -53,6 +56,7 @@ public class RecruitController {
 
     /**
      * 채용 공고 삭제(DB 삭제)
+     *
      * @param recruitId
      * @return ResponseEntity(204)
      */
@@ -64,19 +68,20 @@ public class RecruitController {
 
     /**
      * 채용공고 목록 조회
+     *
      * @return ResponseEntity(200)
      */
     @GetMapping
     public ResponseEntity getRecruitList(@RequestParam(value = "search", required = false) String searchKeyword) {
 
-        List<Recruit> recruitList = recruitService.getRecruitList(searchKeyword);
+        List<RecruitResponseDto> response = recruitService.getRecruitResponseDtoList(searchKeyword);
 
-        List<RecruitResponseDto> response= new ArrayList<>();
-        for (Recruit recruit : recruitList) {
-            RecruitResponseDto recruitResponseDto = recruitMapper.recruitToRecruitResponseDTO(recruit);
-            recruitResponseDto.setCompanyName(recruit.getCompany().getName());
-            response.add(recruitResponseDto);
-        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/{recruit-id}")
+    public ResponseEntity getRecruitDetail(@PathVariable("recruit-id") Long recruitId) {
+        RecruitDetailResponseDto response = recruitService.getRecruitDetailResponseDto(recruitId);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -4,14 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import wanted.subject.company.service.CompanyService;
+import wanted.subject.recruit.dto.RecruitDetailResponseDto;
 import wanted.subject.recruit.dto.RecruitPatchDto;
 import wanted.subject.recruit.dto.RecruitRequestDto;
+import wanted.subject.recruit.dto.RecruitResponseDto;
 import wanted.subject.recruit.entity.Recruit;
 import wanted.subject.recruit.mapper.RecruitMapper;
 import wanted.subject.recruit.repository.RecruitRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -62,9 +65,44 @@ public class RecruitService {
     }
 
 
-    public List<Recruit> getRecruitList(String searchKeyword) {
-        if (searchKeyword != null) return recruitRepository.findAll();
-        return recruitRepository.findAll();
+    /**
+     * GET : 채용 공고 목록 조회
+     * @param searchKeyword
+     * @return
+     */
+    @Transactional(readOnly = true)
+    public List<RecruitResponseDto> getRecruitResponseDtoList(String searchKeyword) {
+
+        List<Recruit> recruitList = recruitRepository.findAll();
+
+        List<RecruitResponseDto> RecruitResponseDtoList = new ArrayList<>();
+        for (Recruit recruit : recruitList) {
+            RecruitResponseDto recruitResponseDto = recruitMapper.recruitToRecruitResponseDTO(recruit);
+            recruitResponseDto.setCompanyName(recruit.getCompany().getName());
+            RecruitResponseDtoList.add(recruitResponseDto);
+        }
+
+        return RecruitResponseDtoList;
+    }
+
+    /**
+     * 채용 공고 상세 조회
+     * @param recruitId
+     * @return RecruitDetailResponseDto
+     */
+    @Transactional(readOnly = true)
+    public RecruitDetailResponseDto getRecruitDetailResponseDto(Long recruitId) {
+
+        // recruitId -> Recruit
+        Recruit recruit = verifiedRecruit(recruitId);
+
+        // 채용 공고 상세 dto (회사 이름, 회사의 다른 공고도 조회하도록 설정)
+        RecruitDetailResponseDto recruitDetailResponseDto = recruitMapper.recruitToRecruitDetailResponseDTO(recruit);   // Recruit -> RecruitDetailResponseDto
+        recruitDetailResponseDto.setCompanyName(recruit.getCompany().getName());                                        // 회사 이름 설정
+        recruitDetailResponseDto.setAnotherRecruit(                                                                     // 회시가 올린 다른 채용 공고 id 조회
+                recruit.getCompany().getRecruits().stream().map(Recruit::getId).collect(Collectors.toList())
+        );
+        return recruitDetailResponseDto;
     }
 
     /**
