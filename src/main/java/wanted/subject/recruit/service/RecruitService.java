@@ -10,6 +10,7 @@ import wanted.subject.recruit.entity.Recruit;
 import wanted.subject.recruit.mapper.RecruitMapper;
 import wanted.subject.recruit.repository.RecruitRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,6 +34,7 @@ public class RecruitService {
 
     /**
      * Update : 수정
+     *
      * @param recruitId
      * @param recruitPatchDto
      * @return Recruit
@@ -52,18 +54,22 @@ public class RecruitService {
 
     /**
      * DELETE : 삭제
+     *
      * @param recruitId
      */
     public void deleteRecruit(Long recruitId) {
         recruitRepository.delete(verifiedRecruit(recruitId));
     }
 
-    public List<Recruit> getRecruitList() {
+
+    public List<Recruit> getRecruitList(String searchKeyword) {
+        if (searchKeyword != null) return recruitRepository.findAll();
         return recruitRepository.findAll();
     }
 
     /**
      * recruitId가 유효한지 검증
+     *
      * @param recruitId
      * @return
      */

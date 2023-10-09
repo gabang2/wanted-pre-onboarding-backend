@@ -62,10 +62,16 @@ public class RecruitController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * 채용공고 목록 조회
+     * @return ResponseEntity(200)
+     */
     @GetMapping
-    public ResponseEntity getRecruitList() {
+    public ResponseEntity getRecruitList(@RequestParam(value = "search", required = false) String searchKeyword) {
+
+        List<Recruit> recruitList = recruitService.getRecruitList(searchKeyword);
+
         List<RecruitResponseDto> response= new ArrayList<>();
-        List<Recruit> recruitList = recruitService.getRecruitList();
         for (Recruit recruit : recruitList) {
             RecruitResponseDto recruitResponseDto = recruitMapper.recruitToRecruitResponseDTO(recruit);
             recruitResponseDto.setCompanyName(recruit.getCompany().getName());
