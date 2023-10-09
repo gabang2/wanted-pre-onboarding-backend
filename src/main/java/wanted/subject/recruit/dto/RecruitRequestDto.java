@@ -2,6 +2,7 @@ package wanted.subject.recruit.dto;
 
 import lombok.*;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Getter
@@ -19,7 +20,7 @@ public class RecruitRequestDto {
     private String region;          // 지역
     @NotNull
     private String position;        // 채용 포지션
-    @NotNull
+    @Min(0)
     private int reward;             // 채용 보상금
     @NotNull
     private String tech;            // 사용 기술
