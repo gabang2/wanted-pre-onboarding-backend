@@ -32,6 +32,7 @@ public class UserService {
      * @param userId
      * @return
      */
+    @Transactional(readOnly = true)
     public User verifiedUser(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("userId가 유효하지 않습니다."));
     }

@@ -68,7 +68,7 @@ public class RecruitService {
     /**
      * GET : 채용 공고 목록 조회
      *
-     * @param searchKeyword
+     * @param search
      * @return
      */
     @Transactional(readOnly = true)
@@ -120,6 +120,7 @@ public class RecruitService {
      * @param recruitId
      * @return
      */
+    @Transactional(readOnly = true)
     public Recruit verifiedRecruit(Long recruitId) {
         return recruitRepository.findById(recruitId).orElseThrow(() -> new RuntimeException("채용 공고 Id 가 유효하지 않습니다."));
     }

@@ -32,6 +32,7 @@ public class CompanyService {
      * @param companyId
      * @return Company
      */
+    @Transactional(readOnly = true)
     public Company verifiedCompany(Long companyId) {
         return companyRepository.findById(companyId).orElseThrow(() -> new RuntimeException("회사 id 가 유효하지 않습니다."));
     }
