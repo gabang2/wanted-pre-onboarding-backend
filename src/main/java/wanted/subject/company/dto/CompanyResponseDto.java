@@ -9,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyResponseDto {
-    private Long id;
-    private String name;
+    private Long id;        // 회사 id
+    private String name;    // 회사 이름
 }

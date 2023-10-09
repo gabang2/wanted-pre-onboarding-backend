@@ -12,5 +12,5 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class CompanyRequestDto {
     @NotNull
-    private String name;
+    private String name;    // 회사 이름
 }

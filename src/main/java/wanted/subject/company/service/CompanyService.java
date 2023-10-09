@@ -22,7 +22,8 @@ public class CompanyService {
      */
     public Company createCompany(CompanyRequestDto companyRequestDto) {
 
-        Company company = Company.builder().name(companyRequestDto.getName()).build();  // company 생성
+        // company 생성
+        Company company = Company.builder().name(companyRequestDto.getName()).build();
 
         return companyRepository.save(company);
     }

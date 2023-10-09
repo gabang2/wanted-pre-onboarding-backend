@@ -21,9 +21,17 @@ import javax.validation.Valid;
 public class CompanyController {
     private final CompanyService companyService;
     private final CompanyMapper companyMapper;
+
+    /**
+     * company 생성
+     * @param companyRequestDto
+     * @return
+     */
     @PostMapping
     public ResponseEntity createCompany(@Valid @RequestBody CompanyRequestDto companyRequestDto) {
+        // company
         Company company = companyService.createCompany(companyRequestDto);
+        // response
         CompanyResponseDto response = companyMapper.companyToCompanyResponseDTO(company);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
