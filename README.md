@@ -155,3 +155,11 @@
    }
     ```
    - response **201** Created
+2. [사용자 등록] **POST** /users
+   - request
+   ```json
+   {
+     "name" : "김가영"
+   }
+    ```
+   - response **201** Created
