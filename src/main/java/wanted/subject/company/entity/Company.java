@@ -1,21 +1,22 @@
 package wanted.subject.company.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.*;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Company {
     @Id
     @GeneratedValue
     private Long id;
     private String name;
+
+    @Builder
+    public Company(String name) {
+        this.name = name;
+    }
 }
