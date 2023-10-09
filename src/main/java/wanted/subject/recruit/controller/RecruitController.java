@@ -1,4 +1,4 @@
-package wanted.subject.recruitment.controller;
+package wanted.subject.recruit.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wanted.subject.recruitment.dto.RecruitRequestDto;
-import wanted.subject.recruitment.mapper.RecruitMapper;
-import wanted.subject.recruitment.service.RecruitService;
+import wanted.subject.recruit.dto.RecruitRequestDto;
+import wanted.subject.recruit.service.RecruitService;
 
 import javax.validation.Valid;
 

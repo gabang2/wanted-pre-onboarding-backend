@@ -1,4 +1,4 @@
-package wanted.subject.recruitment.entity;
+package wanted.subject.recruit.entity;
 
 import lombok.AccessLevel;
 import lombok.Builder;

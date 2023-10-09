@@ -1,4 +1,4 @@
-package wanted.subject.recruitment.dto;
+package wanted.subject.recruit.dto;
 
 import lombok.*;
 
