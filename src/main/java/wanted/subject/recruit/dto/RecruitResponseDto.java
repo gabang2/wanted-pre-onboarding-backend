@@ -1,6 +1,7 @@
 package wanted.subject.recruit.dto;
 
 import lombok.*;
+import wanted.subject.company.dto.CompanyResponseDto;
 
 @Getter
 @Setter
@@ -14,4 +15,5 @@ public class RecruitResponseDto {
     private int reward;             // 채용 보상금
     private String tech;            // 사용 기술
     private String content;         // 채용 내용
+    private CompanyResponseDto company;
 }

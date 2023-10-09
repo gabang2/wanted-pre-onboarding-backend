@@ -27,4 +27,13 @@ public class CompanyService {
         return companyRepository.save(company);
     }
 
+    /**
+     * companyId가 유효한지 검증
+     * @param companyId
+     * @return Company
+     */
+    public Company verifiedCompany(Long companyId) {
+        return companyRepository.findById(companyId).orElseThrow(() -> new RuntimeException("회사 id 가 유효하지 않습니다."));
+    }
+
 }

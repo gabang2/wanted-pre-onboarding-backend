@@ -4,10 +4,10 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import wanted.subject.company.entity.Company;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -15,6 +15,7 @@ import javax.persistence.Id;
 public class Recruit {
     @Id
     @GeneratedValue
+    @Column(name = "recruit_id")
     private Long id;
 
     private String country;         // 국가
@@ -23,6 +24,11 @@ public class Recruit {
     private int reward;             // 채용 보상금
     private String tech;            // 사용 기술
     private String content;         // 채용 내용
+
+    // 외래키
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     /**
      * 생성자
@@ -41,5 +47,16 @@ public class Recruit {
         this.reward = reward;
         this.tech = tech;
         this.content = content;
+    }
+
+    //== 연관관계 매핑 ==//
+    public void setCompany(Company company) {
+        if (this.company != null) {
+            if (this.company.getRecruits().contains(this)) {
+                this.company.getRecruits().remove(this);
+            }
+        }
+        this.company = Optional.ofNullable(company).orElse(this.company);
+        this.company.getRecruits().add(this);
     }
 }

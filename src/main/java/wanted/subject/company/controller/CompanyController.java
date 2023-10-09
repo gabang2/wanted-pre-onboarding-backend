@@ -23,7 +23,8 @@ public class CompanyController {
     private final CompanyMapper companyMapper;
     @PostMapping
     public ResponseEntity createCompany(@Valid @RequestBody CompanyRequestDto companyRequestDto) {
-        companyService.createCompany(companyRequestDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        Company company = companyService.createCompany(companyRequestDto);
+        CompanyResponseDto response = companyMapper.companyToCompanyResponseDTO(company);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 }
