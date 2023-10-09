@@ -128,7 +128,7 @@
          "content": "경력 1년 이상 Django 개발자를 모십니다."
          }
       ]
-   ```
+     ```
    
 6. [채용 상세 페이지] **GET** /recruitments/{recruitment-id}
     - response : 현재 채용 공고를 제외한, 회사의 채용공고 리스트 보여줌(anotherRecruit)
