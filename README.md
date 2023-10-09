@@ -24,7 +24,8 @@
 6. 사용자의 채용 공고 지원
    - 사용자는 하나의 채용공고에 대해서 한 번만 지원 가능하다.
    - 사용자의 id와 채용 공고의 id를 이용하여 채용 공고에 지원한 정보를 저장한다.
-
+## 데이터베이스 설계
+![image](https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/df8aa4c0-46c5-4ba1-b086-39ceef0fc8d8)
 ## api 명세서
 1. [채용공고 등록] **POST** /recruitments
 - request
