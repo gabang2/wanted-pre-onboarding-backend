@@ -24,7 +24,7 @@ public class RecruitController {
     /**
      * 채용 공고 생성
      * @param recruitRequestDto
-     * @return ResponseEntity
+     * @return ResponseEntity(201)
      */
     @PostMapping
     public ResponseEntity createRecruit(@Valid @RequestBody RecruitRequestDto recruitRequestDto) {
@@ -34,12 +34,29 @@ public class RecruitController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    /**
+     * 채용공고 수정
+     * @param recruitId
+     * @param recruitPatchDto
+     * @return ResponseEntity(200)
+     */
     @PatchMapping("/{recruit-id}")
     public ResponseEntity patchRecruit(@Positive @PathVariable("recruit-id") Long recruitId,
                                        @Valid @RequestBody RecruitPatchDto recruitPatchDto) {
         Recruit recruit = recruitService.updateRecruit(recruitId, recruitPatchDto);
         RecruitResponseDto response = recruitMapper.recruitToRecruitResponseDTO(recruit);
         response.setCompanyName(recruit.getCompany().getName());
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    /**
+     * 채용 공고 삭제(DB 삭제)
+     * @param recruitId
+     * @return ResponseEntity(204)
+     */
+    @DeleteMapping("/{recruit-id}")
+    public ResponseEntity deleteRecruit(@Positive @PathVariable("recruit-id") Long recruitId) {
+        recruitService.deleteRecruit(recruitId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

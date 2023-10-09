@@ -48,6 +48,10 @@ public class RecruitService {
         return recruit;
     }
 
+    public void deleteRecruit(Long recruitId) {
+        recruitRepository.delete(verifiedRecruit(recruitId));
+    }
+
     /**
      * recruitId가 유효한지 검증
      * @param recruitId
