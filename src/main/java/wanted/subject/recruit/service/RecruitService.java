@@ -72,9 +72,13 @@ public class RecruitService {
      * @return
      */
     @Transactional(readOnly = true)
-    public List<RecruitResponseDto> getRecruitResponseDtoList(String searchKeyword) {
-
-        List<Recruit> recruitList = recruitRepository.findAll();
+    public List<RecruitResponseDto> getRecruitResponseDtoList(String search) {
+        List<Recruit> recruitList;
+        if (!search.isEmpty()) {
+            recruitList = recruitRepository.findBySearch(search);
+        } else {
+            recruitList = recruitRepository.findAll();
+        }
 
         List<RecruitResponseDto> RecruitResponseDtoList = new ArrayList<>();
         for (Recruit recruit : recruitList) {

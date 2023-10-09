@@ -72,9 +72,9 @@ public class RecruitController {
      * @return ResponseEntity(200)
      */
     @GetMapping
-    public ResponseEntity getRecruitList(@RequestParam(value = "search", required = false) String searchKeyword) {
+    public ResponseEntity getRecruitList(@RequestParam(value = "search", required = false) String search) {
 
-        List<RecruitResponseDto> response = recruitService.getRecruitResponseDtoList(searchKeyword);
+        List<RecruitResponseDto> response = recruitService.getRecruitResponseDtoList(search);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
