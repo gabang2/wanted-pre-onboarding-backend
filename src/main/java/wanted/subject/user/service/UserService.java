@@ -27,4 +27,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * userId 검증
+     * @param userId
+     * @return
+     */
+    public User verifiedUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("userId가 유효하지 않습니다."));
+    }
+
 }

@@ -5,8 +5,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import wanted.subject.company.entity.Company;
+import wanted.subject.userrecruit.entity.UserRecruit;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Entity
@@ -29,6 +32,10 @@ public class Recruit {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    // 연관관계 매핑
+    @OneToMany(mappedBy = "recruit", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<UserRecruit> userRecruits = new ArrayList<>();
 
     /**
      * 생성자
