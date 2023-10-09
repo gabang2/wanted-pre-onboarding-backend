@@ -300,6 +300,9 @@ https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/09428f3
 ### 채용공고 수정
 https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/fd4b9054-f80c-4e9e-9ec0-473ed462775a
 
+### 채용공고 삭제
+https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/37e48626-3fac-4645-b107-80c688ba33d9
+
 ### 채용공고 목록 조회 + 검색
 https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/d2052334-a914-4158-a76c-d5077f8dad6f
 
