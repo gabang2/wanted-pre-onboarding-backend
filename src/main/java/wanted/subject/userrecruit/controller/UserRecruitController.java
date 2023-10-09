@@ -22,6 +22,12 @@ import javax.validation.Valid;
 public class UserRecruitController {
     private final UserRecruitService userRecruitService;
     private final UserRecruitMapper userRecruitMapper;
+
+    /**
+     * UserRecruit 생성
+     * @param userRecruitRequestDto
+     * @return ResponseEntity(201)
+     */
     @PostMapping
     public ResponseEntity createUserRecruit(@Valid @RequestBody UserRecruitRequestDto userRecruitRequestDto) {
         UserRecruit userRecruit = userRecruitService.createUserRecruit(userRecruitRequestDto);

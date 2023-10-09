@@ -42,6 +42,11 @@ public class UserRecruitService {
         return userRecruitRepository.save(userRecruit);
     }
 
+    /**
+     * 유저가 채용공고 최초로 지원하는지 검증
+     * @param user
+     * @param recruit
+     */
     private static void verifiedUserRecruit(User user, Recruit recruit) {
         for (UserRecruit userRecruit : user.getUserRecruits()) {
             if (recruit == userRecruit.getRecruit()) {

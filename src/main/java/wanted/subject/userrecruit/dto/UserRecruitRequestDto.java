@@ -12,8 +12,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserRecruitRequestDto {
     @Min(1)
-    private Long userId;
+    private Long userId;        // 사용자 id
 
     @Min(1)
-    private Long recruitId;
+    private Long recruitId;     // 채용 공고 id
 }

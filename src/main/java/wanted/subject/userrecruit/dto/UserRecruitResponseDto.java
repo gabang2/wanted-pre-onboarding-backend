@@ -10,6 +10,6 @@ import wanted.subject.user.dto.UserResponseDto;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRecruitResponseDto {
-    private UserResponseDto user;
-    private RecruitResponseDto recruit;
+    private UserResponseDto user;       // 사용자 id
+    private RecruitResponseDto recruit; // 채용공고 id
 }
