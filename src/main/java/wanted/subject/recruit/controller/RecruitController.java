@@ -13,6 +13,8 @@ import wanted.subject.recruit.service.RecruitService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -58,5 +60,17 @@ public class RecruitController {
     public ResponseEntity deleteRecruit(@Positive @PathVariable("recruit-id") Long recruitId) {
         recruitService.deleteRecruit(recruitId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping
+    public ResponseEntity getRecruitList() {
+        List<RecruitResponseDto> response= new ArrayList<>();
+        List<Recruit> recruitList = recruitService.getRecruitList();
+        for (Recruit recruit : recruitList) {
+            RecruitResponseDto recruitResponseDto = recruitMapper.recruitToRecruitResponseDTO(recruit);
+            recruitResponseDto.setCompanyName(recruit.getCompany().getName());
+            response.add(recruitResponseDto);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

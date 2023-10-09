@@ -10,6 +10,8 @@ import wanted.subject.recruit.entity.Recruit;
 import wanted.subject.recruit.mapper.RecruitMapper;
 import wanted.subject.recruit.repository.RecruitRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -48,8 +50,16 @@ public class RecruitService {
         return recruit;
     }
 
+    /**
+     * DELETE : 삭제
+     * @param recruitId
+     */
     public void deleteRecruit(Long recruitId) {
         recruitRepository.delete(verifiedRecruit(recruitId));
+    }
+
+    public List<Recruit> getRecruitList() {
+        return recruitRepository.findAll();
     }
 
     /**

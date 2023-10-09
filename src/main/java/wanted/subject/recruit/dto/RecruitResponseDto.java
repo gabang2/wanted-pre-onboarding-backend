@@ -9,7 +9,8 @@ import wanted.subject.company.dto.CompanyResponseDto;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecruitResponseDto {
-    private String companyName;         // 회사명
+    private Long id;                // 채용 공고 id
+    private String companyName;     // 회사명
     private String country;         // 국가
     private String region;          // 지역
     private String position;        // 채용 포지션

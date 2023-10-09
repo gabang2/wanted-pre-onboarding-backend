@@ -6,6 +6,8 @@ import wanted.subject.recruit.dto.RecruitRequestDto;
 import wanted.subject.recruit.dto.RecruitResponseDto;
 import wanted.subject.recruit.entity.Recruit;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RecruitMapper {
 
@@ -14,4 +16,6 @@ public interface RecruitMapper {
 
     // RecruitRequestDTO -> User
     Recruit recruitRequestDtoToRecruit(RecruitRequestDto RecruitRequestDto);
+
+    List<RecruitResponseDto> recruitListToRecruitResponseDTOList(List<Recruit> recruitList);
 }
