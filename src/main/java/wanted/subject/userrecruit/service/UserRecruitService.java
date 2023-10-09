@@ -3,6 +3,7 @@ package wanted.subject.userrecruit.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import wanted.subject.recruit.entity.Recruit;
 import wanted.subject.recruit.service.RecruitService;
 import wanted.subject.user.entity.User;
 import wanted.subject.user.service.UserService;
@@ -26,11 +27,26 @@ public class UserRecruitService {
      */
     public UserRecruit createUserRecruit(UserRecruitRequestDto userRecruitRequestDto) {
 
+        // 외래키로 엔티티 추출
+        User user = userService.verifiedUser(userRecruitRequestDto.getUserId());
+        Recruit recruit = recruitService.verifiedRecruit(userRecruitRequestDto.getRecruitId());
+
+        // 채용 공고에 지원한 적 있는지 검증, 지원했다면 Exception 발생
+        verifiedUserRecruit(user, recruit);
+
+        // 채용 공고 지원
         UserRecruit userRecruit = new UserRecruit();
-        userRecruit.setUser(userService.verifiedUser(userRecruitRequestDto.getUserId()));
-        userRecruit.setRecruit(recruitService.verifiedRecruit(userRecruitRequestDto.getRecruitId()));
+        userRecruit.setUser(user);
+        userRecruit.setRecruit(recruit);
 
         return userRecruitRepository.save(userRecruit);
     }
 
+    private static void verifiedUserRecruit(User user, Recruit recruit) {
+        for (UserRecruit userRecruit : user.getUserRecruits()) {
+            if (recruit == userRecruit.getRecruit()) {
+                throw new RuntimeException("한 번 지원한 공고는 두 번 지원할 수 없습니다.");
+            }
+        }
+    }
 }
