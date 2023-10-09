@@ -291,3 +291,42 @@
       return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("userId가 유효하지 않습니다."));
    }
    ```
+  
+## 시연영상
+
+### 채용공고 등록
+https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/09428f3e-1ecc-4132-a882-6dfe455bb0c3
+
+### 채용공고 수정
+https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/fd4b9054-f80c-4e9e-9ec0-473ed462775a
+
+### 채용공고 목록 조회 + 검색
+https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/d2052334-a914-4158-a76c-d5077f8dad6f
+
+### 채용공고 상세 조회(단일)
+https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/3110401d-c933-4b59-bc6f-e654b77ac057
+
+### 채용공고 지원
+https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/1e483a6f-0613-4e8f-9a19-d2e1a8cfba2b
+
+## Git Convention
+- Commit 규칙
+```text
+태그 #이슈번호 : commit 내용
+```
+
+- 태그 규칙
+```text
+Feat	    새로운 기능을 추가
+Fix         버그 수정
+Design	    CSS 등 사용자 UI 디자인 변경
+!HOTFIX	    급하게 치명적인 버그를 고쳐야하는 경우
+Style	    코드 포맷 변경, 세미 콜론 누락, 코드 수정이 없는 경우
+Refactor    프로덕션 코드 리팩토링
+Comment	    필요한 주석 추가 및 변경
+Docs	    문서 수정
+Test	    테스트 코드, 리펙토링 테스트 코드 추가, Production Code(실제로 사용하는 코드) 변경 없음
+Chore	    빌드 업무 수정, 패키지 매니저 수정, 패키지 관리자 구성 등 업데이트, Production Code 변경 없음
+Rename	    파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우
+Remove	    파일을 삭제하는 작업만 수행한 경우
+```
