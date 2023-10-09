@@ -1,32 +1,31 @@
-# 요구사항 분석
-1. 채용 공고 등록
-    - 회사 **[회사 id]** 는 채용 공고를 등록할 수 있다.
-    - 채용 공고에는 **[국가, 지역, 채용포지션, 채용보상금, 사용기술, 채용내용]** 을 등록할 수 있다.
-    - 모든 컬럼의 값은 필수로 입력해야 한다.
-    - 채용보상금은 0보다 크거나 같아야 한다.
-2. 채용 공고 수정
-    - **[국가, 지역, 채용포지션, 채용보상금, 사용기술, 채용내용]** 을 수정할 수 있다.
-    - 채용보상금은 0보다 크거나 같아야 한다.
-    - 입력하지 않는 경우에는 수정하지 않는다.
-3. 채용 공고 삭제
-    - 채용 공고를 삭제한다.
-    - 채용공고를 등록한 회사와 채용공고에 지원한 사용자의 외래키 목록에서 삭제한다.
-4. 채용 공고 조회
-    - 단순 조회
-        - 모든 채용공고 목록을 리스트 형식으로 조회한다.
-        - 회사는 id가 아닌 회사명으로 표시한다.
-    - 검색 조회
-        - search-keyword를 기준으로 채용공고 목록을 리스트 형식으로 조회한다.
-        - 모든 컬럼에서 search-keyword를 포함하고 있으면 목록에 포함한다.
-        - 회사는 id가 아닌 회사명으로 표시한다.
-5. 채용 상세페이지 조회
-   - 채용 공고에서 회사가 올린 다른 채용 공고를 포함해서 응답한다.
-   - 현재 확인하고 있는 채용 공고와 다른 채용공고의 id만 포함해서 응답한다.
-6. 사용자의 채용 공고 지원
-   - 사용자는 하나의 채용공고에 대해서 한 번만 지원 가능하다.
-   - 사용자의 id와 채용 공고의 id를 이용하여 채용 공고에 지원한 정보를 저장한다.
-## 데이터베이스 설계
-![image](https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/df8aa4c0-46c5-4ba1-b086-39ceef0fc8d8)
+# 원티드 프리온보딩 사전과제(10월)
+- 이름 : 김가영
+## 어플리케이션 실행 방법
+1. git clone
+   ```shell
+   git clone https://github.com/gabang2/wanted-pre-onboarding-backend.git
+   ```
+2. database 설정 - application.yml파일 수정
+   ```shell
+   url: jdbc:mysql://localhost:3306/{스키마 이름}
+   username: {db의 user 이름}
+   password: {db의 password}
+   ```
+## 데이터베이스 테이블 구조
+![image](https://github.com/gabang2/wanted-pre-onboarding-backend/assets/82714785/1229afb7-5471-48d6-9efa-70b034329ecf)
+
+## API 명세
+
+| NO. | Description | Method | Path                      | Request Parameters                                                      |
+|:---:|-------------|--------|---------------------------|-------------------------------------------------------------------------|
+|  1  | 회사 등록       | POST   | /companys                 | `body`  { name }                                                        |
+|  2  | 사용자 등록      | POST   | /users                    | `body`  { name }                                                        |
+|  3  | 채용공고 등록     | POST   | /recruits                 | `body`  { companyId, country, region, position, reward, tech, content } |
+|  4  | 채용공고 수정     | PATCH  | /recruits/{recruit-id}    | `body`  { country, region, position, reward, tech, content }            |
+|  5  | 채용공고 삭제     | DELETE | /recruits/{recruit-id}    |                                                                         |
+|  6  | 채용공고 목록 조회  | GET    | /recruits?search={search} | `query` search <br>(optional)                                           |
+|  7  | 채용공고 상세 조회  | GET    | /recruits/{recruit-id}    |                                                                         |
+
 ## api 명세서
 1. [채용공고 등록] **POST** /recruitments
    - request
@@ -206,3 +205,89 @@
         "name": "김가영"
       }
      ```
+
+## 요구사항 분석
+1. 채용 공고 등록
+   - 회사 **[회사 id]** 는 채용 공고를 등록할 수 있다.
+   - 채용 공고에는 **[국가, 지역, 채용포지션, 채용보상금, 사용기술, 채용내용]** 을 등록할 수 있다.
+   - 모든 컬럼의 값은 필수로 입력해야 한다.
+   - 채용보상금은 0보다 크거나 같아야 한다.
+2. 채용 공고 수정
+   - **[국가, 지역, 채용포지션, 채용보상금, 사용기술, 채용내용]** 을 수정할 수 있다.
+   - 채용보상금은 0보다 크거나 같아야 한다.
+   - 입력하지 않는 경우에는 수정하지 않는다.
+3. 채용 공고 삭제
+   - 채용 공고를 삭제한다.
+   - 채용공고를 등록한 회사와 채용공고에 지원한 사용자의 외래키 목록에서 삭제한다.
+4. 채용 공고 조회
+   - 단순 조회
+      - 모든 채용공고 목록을 리스트 형식으로 조회한다.
+      - 회사는 id가 아닌 회사명으로 표시한다.
+   - 검색 조회
+      - search-keyword를 기준으로 채용공고 목록을 리스트 형식으로 조회한다.
+      - 모든 컬럼에서 search-keyword를 포함하고 있으면 목록에 포함한다.
+      - 회사는 id가 아닌 회사명으로 표시한다.
+5. 채용 상세페이지 조회
+   - 채용 공고에서 회사가 올린 다른 채용 공고를 포함해서 응답한다.
+   - 현재 확인하고 있는 채용 공고와 다른 채용공고의 id만 포함해서 응답한다.
+6. 사용자의 채용 공고 지원
+   - 사용자는 하나의 채용공고에 대해서 한 번만 지원 가능하다.
+   - 사용자의 id와 채용 공고의 id를 이용하여 채용 공고에 지원한 정보를 저장한다.
+
+## 구현 방법 및 이유
+### 검색 기능
+- 모든 컬럼에 대해서 검색을 할 수 있도록 JPQL 쿼리 작성
+   ```java
+   public interface RecruitRepository extends JpaRepository<Recruit, Long> {
+       // 키워드 기준으로 검색
+       @Query("select r from Recruit r "
+               + "where r.company.name like concat('%', :search, '%')"
+               + "or r.country like concat('%', :search, '%')"
+               + "or r.region like concat('%', :search, '%')"
+               + "or r.position like concat('%', :search, '%')"
+               + "or r.tech like concat('%', :search, '%')"
+               + "or r.content like concat('%', :search, '%')")
+       List<Recruit> findBySearch(@Param("search") String search);
+   
+   }
+   ```
+  - datajpa의 jpql을 이용하여 복잡해질 수 있는 쿼리를 가시적으로 작성하였음
+  - querydsl은 오히려 가독성이 떨어진다고 판단하였음
+
+### 검증 메서드 분리
+- verified(id) 메서드
+   ```java
+    @Transactional(readOnly = true)
+    public Recruit verifiedRecruit(Long recruitId) {
+        return recruitRepository.findById(recruitId).orElseThrow(() -> new RuntimeException("채용 공고 Id 가 유효하지 않습니다."));
+    }
+   ```
+  - 엔티티의 id가 없는데 엔티티를 사용하려고 할 경우 exception을 throw 하도록 메서드를 만들었음
+  - 중복되는 코드를 줄여 코드의 복잡도를 낮추고, 메서드의 재사용성을 높임.
+- 한 유저가 채용 공고에 두 번 지원했을 경우, 에러 발생 Exception 메서드 분리
+   ``` java
+   private static void verifiedUserRecruit(User user, Recruit recruit) {
+     for (UserRecruit userRecruit : user.getUserRecruits()) {
+         if (recruit == userRecruit.getRecruit()) {
+             throw new RuntimeException("한 번 지원한 공고는 두 번 지원할 수 없습니다.");
+         }
+     }
+   }
+  ```
+  - Service단의 길어지는 코드를 분리하여 코드 가독성을 높임
+
+### Response와 엔티티 매핑
+- Mapstruct를 이용하여 엔티티를 Response와 매핑
+   ```java
+   RecruitResponseDto response = recruitMapper.recruitToRecruitResponseDTO(recruit);
+   ```
+- 불필요한 코드를 줄이기 위해 사용함
+  
+### Transactional(readonly=true)
+- 불필요한 메모리 사용을 최소화하기 위해서 GET메서드 또는 verified엔티티 메서드는 readonly로 설정
+   ```java
+   @Transactional(readOnly = true)
+   public User verifiedUser(Long userId) {
+      return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("userId가 유효하지 않습니다."));
+   }
+   ```
