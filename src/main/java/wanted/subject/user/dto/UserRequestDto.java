@@ -11,5 +11,5 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class UserRequestDto {
     @NotNull
-    private String name;
+    private String name;    // 사용자 이름
 }

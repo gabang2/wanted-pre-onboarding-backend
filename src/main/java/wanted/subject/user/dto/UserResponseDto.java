@@ -8,6 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponseDto {
-    private Long id;
-    private String name;
+    private Long id;        // 사용자 id
+    private String name;    // 사용자 이름
 }

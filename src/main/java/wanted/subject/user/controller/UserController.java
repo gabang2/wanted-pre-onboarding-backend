@@ -21,6 +21,12 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
+
+    /**
+     * User 생성
+     * @param userRequestDto
+     * @return
+     */
     @PostMapping
     public ResponseEntity createUser(@Valid @RequestBody UserRequestDto userRequestDto) {
         User user = userService.createUser(userRequestDto);

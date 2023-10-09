@@ -22,7 +22,8 @@ public class UserService {
      */
     public User createUser(UserRequestDto userRequestDto) {
 
-        User user = User.builder().name(userRequestDto.getName()).build();  // user 생성
+        // user 생성
+        User user = User.builder().name(userRequestDto.getName()).build();
 
         return userRepository.save(user);
     }
