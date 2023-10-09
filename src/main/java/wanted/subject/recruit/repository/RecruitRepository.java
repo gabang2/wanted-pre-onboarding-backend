@@ -8,6 +8,7 @@ import wanted.subject.recruit.entity.Recruit;
 import java.util.List;
 
 public interface RecruitRepository extends JpaRepository<Recruit, Long> {
+    // 키워드 기준으로 검색
     @Query("select r from Recruit r "
             + "where r.company.name like concat('%', :search, '%')"
             + "or r.country like concat('%', :search, '%')"

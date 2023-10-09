@@ -20,6 +20,4 @@ public interface RecruitMapper {
 
     // RecruitRequestDTO -> Recruit
     Recruit recruitRequestDtoToRecruit(RecruitRequestDto RecruitRequestDto);
-
-    List<RecruitResponseDto> recruitListToRecruitResponseDTOList(List<Recruit> recruitList);
 }

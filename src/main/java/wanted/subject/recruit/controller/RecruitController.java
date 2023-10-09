@@ -32,9 +32,14 @@ public class RecruitController {
      */
     @PostMapping
     public ResponseEntity createRecruit(@Valid @RequestBody RecruitRequestDto recruitRequestDto) {
+
+        // Recruit 생성
         Recruit recruit = recruitService.createRecruit(recruitRequestDto);
+
+        // response 생성(company name도 설정)
         RecruitResponseDto response = recruitMapper.recruitToRecruitResponseDTO(recruit);
         response.setCompanyName(recruit.getCompany().getName());
+
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
@@ -48,9 +53,13 @@ public class RecruitController {
     @PatchMapping("/{recruit-id}")
     public ResponseEntity patchRecruit(@Positive @PathVariable("recruit-id") Long recruitId,
                                        @Valid @RequestBody RecruitPatchDto recruitPatchDto) {
+        // recruit 수정
         Recruit recruit = recruitService.updateRecruit(recruitId, recruitPatchDto);
+
+        // response(company name도 설정)
         RecruitResponseDto response = recruitMapper.recruitToRecruitResponseDTO(recruit);
         response.setCompanyName(recruit.getCompany().getName());
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -73,9 +82,7 @@ public class RecruitController {
      */
     @GetMapping
     public ResponseEntity getRecruitList(@RequestParam(value = "search", required = false) String search) {
-
         List<RecruitResponseDto> response = recruitService.getRecruitResponseDtoList(search);
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

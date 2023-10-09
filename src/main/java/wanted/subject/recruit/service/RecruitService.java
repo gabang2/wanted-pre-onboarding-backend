@@ -30,7 +30,9 @@ public class RecruitService {
      * @param recruitRequestDto
      */
     public Recruit createRecruit(RecruitRequestDto recruitRequestDto) {
+        // recruit 엔티티 찾기
         Recruit recruit = recruitMapper.recruitRequestDtoToRecruit(recruitRequestDto);
+        // company 외래키 설정
         recruit.setCompany(companyService.verifiedCompany(recruitRequestDto.getCompanyId()));
         return recruitRepository.save(recruit);
     }
@@ -43,7 +45,9 @@ public class RecruitService {
      * @return Recruit
      */
     public Recruit updateRecruit(Long recruitId, RecruitPatchDto recruitPatchDto) {
+        // recruit 엔티티 찾기
         Recruit recruit = verifiedRecruit(recruitId);
+        // recruit 엔티티 수정
         recruit.updateRecruit(
                 recruitPatchDto.getCountry(),
                 recruitPatchDto.getRegion(),
@@ -73,13 +77,18 @@ public class RecruitService {
      */
     @Transactional(readOnly = true)
     public List<RecruitResponseDto> getRecruitResponseDtoList(String search) {
+
+        // recruitList : 채용 공고 목록
         List<Recruit> recruitList;
+
+        // 키워드 있을 경우 키워드 기준으로 검색
         if (!search.isEmpty()) {
             recruitList = recruitRepository.findBySearch(search);
         } else {
             recruitList = recruitRepository.findAll();
         }
 
+        // RecruitResponseDto(company 이름 추가)
         List<RecruitResponseDto> RecruitResponseDtoList = new ArrayList<>();
         for (Recruit recruit : recruitList) {
             RecruitResponseDto recruitResponseDto = recruitMapper.recruitToRecruitResponseDTO(recruit);
