@@ -12,6 +12,7 @@ import wanted.subject.recruit.entity.Recruit;
 import wanted.subject.recruit.mapper.RecruitMapper;
 import wanted.subject.recruit.repository.RecruitRepository;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -82,7 +83,7 @@ public class RecruitService {
         List<Recruit> recruitList;
 
         // 키워드 있을 경우 키워드 기준으로 검색
-        if (!search.isEmpty()) {
+        if (search != null) {
             recruitList = recruitRepository.findBySearch(search);
         } else {
             recruitList = recruitRepository.findAll();
