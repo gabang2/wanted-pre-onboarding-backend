@@ -53,7 +53,7 @@ class UserServiceTest {
     @Test
     public void 사용자확인실패 () {
         // given
-        UserRequestDto userRequestDto = UserRequestDto.builder().name("김가영'").build();
+        UserRequestDto userRequestDto = UserRequestDto.builder().name("김가영").build();
         User user= userService.createUser(userRequestDto);
         // when
         RuntimeException e = assertThrows(RuntimeException.class, () -> userService.verifiedUser(user.getId() + 1L));

@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RecruitRequestDto {
-    @NotNull
+    @Min(1)
     private Long companyId;
     @NotNull
     private String country;         // 국가
