@@ -79,6 +79,11 @@ public class RecruitController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    /**
+     * 채용 공고 상세 조회(회사의 다른 공고도 확인)
+     * @param recruitId
+     * @return
+     */
     @GetMapping("/{recruit-id}")
     public ResponseEntity getRecruitDetail(@PathVariable("recruit-id") Long recruitId) {
         RecruitDetailResponseDto response = recruitService.getRecruitDetailResponseDto(recruitId);

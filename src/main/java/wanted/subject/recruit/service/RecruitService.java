@@ -67,6 +67,7 @@ public class RecruitService {
 
     /**
      * GET : 채용 공고 목록 조회
+     *
      * @param searchKeyword
      * @return
      */
@@ -87,6 +88,7 @@ public class RecruitService {
 
     /**
      * 채용 공고 상세 조회
+     *
      * @param recruitId
      * @return RecruitDetailResponseDto
      */
@@ -96,11 +98,14 @@ public class RecruitService {
         // recruitId -> Recruit
         Recruit recruit = verifiedRecruit(recruitId);
 
-        // 채용 공고 상세 dto (회사 이름, 회사의 다른 공고도 조회하도록 설정)
+        // 채용 공고 상세 dto (회사 이름, 현재 공고를 제외한 회사의 다른 공고도 조회하도록 설정)
         RecruitDetailResponseDto recruitDetailResponseDto = recruitMapper.recruitToRecruitDetailResponseDTO(recruit);   // Recruit -> RecruitDetailResponseDto
         recruitDetailResponseDto.setCompanyName(recruit.getCompany().getName());                                        // 회사 이름 설정
         recruitDetailResponseDto.setAnotherRecruit(                                                                     // 회시가 올린 다른 채용 공고 id 조회
-                recruit.getCompany().getRecruits().stream().map(Recruit::getId).collect(Collectors.toList())
+                recruit.getCompany().getRecruits().stream()
+                        .filter(r -> !r.getId().equals(recruitId))
+                        .map(Recruit::getId)
+                        .collect(Collectors.toList())
         );
         return recruitDetailResponseDto;
     }
